@@ -1,0 +1,49 @@
+Has an inopportune plunge ever left you at the mercy of gravity?
+Or, are you just frustrated by the abundance of caverns in the base game?
+
+Even if none of these apply: this mod exists now.
+
+Although it isn't necessary, I recommend having [url=steamcommunity.com/sharedfiles/filedetails/?id=751412690][u]NoClueHunt[/u][/url] because many objects needed for story progression will not spawn without caves.
+
+[h1]NOTES[/h1]
+[olist]
+[*]This mod only affects the terrain of newly generated solar systems
+[*]And does not disable any structures/dungeons or protected areas
+[/olist]
+Many structures may look very similar to caves, but are NOT naturally generated caves/terrain.  Even the dark cavern at the beginning of Frackin Universe isn't a natural cave.  To Starbound, a cavelike dungeon just as similar to a USCM base, as a natural cave is to the hills on the surface of a planet.
+
+
+[h1]MY FIRST WORKSHOP SUBMISSION[/h1]
+Since this is the first actual mod I created, I would like to share some things I learned/did during [strike]my suffering[/strike] its development.
+
+[b][u]The most important thing is Starbound's JSON patch format.[/u][/b]
+Starbound has a few additions to its JSON patch functionality.  First, you can have comments!  Secondly, multiple patch 'batches' can be formed in a single file.  Third, Starbound has added more functionality to the "test" operation, [url=community.playstarbound.com/threads/april-21st-%E2%80%93-stable-update-notes.95106/page-5#post-2561028][u]you can see this here[/u][/url].
+
+[b][u]version 0.???[/u] - Trying to get Starbound to stop crashing[/b]
+At the beginning of this project, I decided on a goal for maximum compatibility with other mods.  Although I expect mods to add new region types, it is still possible that some mods will remove base assets.  In anticipation of this, I handcrafted a massive patch file to search for and disable every default cave selector.
+Despite my hard work, Starbound could not read my patch, and crashed.  I spent a few hours each day, making slight changes to my file and crashing Starbound.  Over several days of suffering, the title screen loaded!  I verified that I had just disabled caves!  Now, the most frustrating part was finished.
+
+[b][u]version 1.0[/u] - [strike]having fun automating stuff with Perl[/strike] making it Frackin compatible[/b]
+I did a search in Frackin Universe's content to see how many Region Types were added, it was 287.
+So, I did what anyone else would have done, I made a Perl thing to automate stuff.  Ok, I had already made it at the beginning to save time while tweaking my patch, by recompiling the entire file from the base assets.  (But it still took me several days to get that patch to load even with my script: most of my time was spent watching Starbound load/crash.) All I had to do was modify it to work with Frackin's patches.
+As you might expect, I edited it and [strike]it worked perfectly the first time[/strike] it was missing a ';', it worked once I fixed that.  I added in the new patches and was done.
+
+No? It was completely finished, but I decided it would be fun to rebuild some of my script, so I took the rest of the day making a subroutine that checks for the existence of a JSON path.  But I made it with lots of helpful error reporting, and it automatically detects the data type of each path layer based off the source data input.  Here is a snippet of some stuff from my code: [noparse]qr{^([^"]|\\(["\\/bfnrt]|u[0-9a-fA-F]{4}))*$}[/noparse], that is a pattern that matches a valid JSON string.
+
+[b][u]version 2.0[/u] - [strike]tunneling into countless planets and moons[/strike] testing core layer generation[/b]
+This was another time intensive step; it was necessary because the core liquid is covered with tiles, and during testing I found that players could dig down into it and melt.
+During testing, I experimented with many different methods, but each time I had to dig all the way to the cores of planets from new solar systems, filling my inventory with random tiles and dirt along the way.  I am very thankful for "/admin", "/fullbright", and most of all Frackin Universe's fully upgraded mining laser for making this part bearable.
+In the end, I added a few patch statements to fix this for Frackin Universe and the base assets.  I also added patches to biomes used by the core layers.
+
+[b][u]version 2.1[/u] - documentation[/b]
+I cleaned up the documentation of the main patch, because people might want to unpack and read the contents.
+
+
+[h1]COMPATIBILITY[/h1]
+This mod supports:
+[list]
+[*] FrackinUnivese
+[*] Elithian_Races_Mod
+[/list]
+
+If you have any questions, please feel free to respond below.
